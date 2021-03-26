@@ -4,6 +4,7 @@ const Primary = '#4a47a3'
 const Secondary = '#2b2e4a' 
 const Light = '#f8f8f8'
 const Dark = '#505050'
+const Success = '#00af91'
 
 const color = StyleSheet.create({
     bgPrimary : {

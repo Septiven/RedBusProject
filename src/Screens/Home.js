@@ -1,5 +1,5 @@
 import { Container, Content, Grid, Col, Row, Text, Item, Label, Input, Button, Form, Picker} from 'native-base'
-import React from 'react'
+import React, {useState} from 'react'
 import DatePicker from 'react-native-datepicker'
 import {connect} from 'react-redux'
 
@@ -12,14 +12,23 @@ import typography from './../Supports/Styles/Typography'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Redux
-import {onSetDeparture, onSetArrival} from './../Redux/Actions/FilterAction'
+import {onSetDeparture, onSetArrival, onSetDate,  onSetTotalSeat} from './../Redux/Actions/FilterAction'
 
-const Home = () => {
+const Home = ({navigation: {navigate},onSetDeparture, onSetArrival, filter, onSetTotalSeat,onSetDate}) => {
 
-    const Home = ({onSetDeparture, onSetArrival, filter}) => {
+    const [error, setError] = useState('')
 
-        const checkGStore = () => {
-            console.log(filter)
+    const onSearchShuttle = () => {
+
+        if(filter.seat > 3){
+            return setError('Jumlah Kursi Max 3')
+        }
+
+        if(filter.departure && filter.arrival && filter.date && filter.seat){
+            navigate('ShuttleLists', {data: filter})
+            setError('')
+        }else{
+            return setError('Masukan Semua Inputan')
         }
     }
 
@@ -54,7 +63,7 @@ const Home = () => {
                                     <Label>Tanggal Keberangkatan</Label>
                                     <DatePicker
                                         style={{width: 200, marginTop: 10}}
-                                        date={new Date()}
+                                        date={filter.date}
                                         minDate={new Date()}
                                         mode="date"
                                         format="DD-MM-YYYY"
@@ -75,36 +84,30 @@ const Home = () => {
                                         }
                                         // ... You can check the source to find the other keys.
                                         }}
-                                        onDateChange={(date) => {setTanggal(date)}}
+                                        onDateChange={(date) => onSetDate(date)}
                                     />
                                 </Item>
                             </Form>
 
                         </Col>
                         <Col style={{...spacing.mtThree, ...spacing.mbNine}}>
-                            <Form>
-                                <Item picker>
-                                <Picker
-                                    mode="dropdown"
-                                    iosIcon={<Icon name="arrow-down" />}
-                                    style={{ width: '100%' }}
-                                    placeholder="Jumlah tiket (Maksimal 5 tiket untuk booking)"
-                                >
-                                    <Picker.Item label="1 Ticket" value="key0" />
-                                    <Picker.Item label="2 Ticket" value="key1" />
-                                    <Picker.Item label="3 Ticket" value="key2" />
-                                    <Picker.Item label="4 Ticket" value="key3" />
-                                    <Picker.Item label="5 Ticket" value="key4" />
-                                </Picker>
-                                </Item>
-                            </Form>
+                            <Item style={{width: '100%'}}>
+                                <Input placeholder='Jumlah Kursi (Max 3)' onChangeText={onSetTotalSeat} style={{paddingVertical: 0, fontSize: 15}} />
+                            </Item>
                         </Col>
                         <Col>
-                            <Button rounded style={{width: '100%', ...Color.bgPrimary}}>
+                            <Button onPress={onSearchShuttle} rounded style={{width: '100%', ...Color.bgPrimary}} block>
                                 <Text style={{textAlign: 'center', width: '100%'}}>
                                     Search
                                 </Text>
                             </Button>
+                        </Col>
+                        <Col style={{justifyContent: 'center'}}>
+                        <Text style={{...Color.primary, fontStyle: 'italic'}}>
+                            {
+                                error
+                            }
+                        </Text>
                         </Col>
                     </Col>
                 </Grid>
@@ -114,7 +117,7 @@ const Home = () => {
 }
 
 const mapDispatchToProps = {
-    onSetDeparture, onSetArrival
+    onSetDeparture, onSetArrival, onSetTotalSeat, onSetDate
 }
 
 const mapStateToProps = (state) => {

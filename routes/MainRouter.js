@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 // Screens
-import Home from './../src/Screens/Home'
+import HomeNavigator from './HomeRouter'
 import BookingHistory from './../src/Screens/BookingHistory'
 import Profile from '../src/Screens/Profile'
 
@@ -21,11 +21,11 @@ const MainRouter = () => {
             tabBarOptions={{size: 7, activeTintColor: '#fa1e0e', inactiveTintColor: '#4a47a3' }}
         >
             <Tab.Screen 
-                name='Home' component={Home}
+                name='Home' component={HomeNavigator}
                 options={{
                     tabBarIcon: ({color, size}) => {
                         return(
-                            <Icon name='home' color={color} size={size} />
+                            <Icon name='circle' color={color} size={size} />
                         )
                     }
                 }} 

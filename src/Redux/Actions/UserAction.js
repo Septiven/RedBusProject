@@ -77,12 +77,22 @@ export const onUserLogin = (inputEmail, inputPassword) => {
             if(res.data.length === 1){
                 console.log(res.data[0].id)
                 AsyncStorage.setItem('@id', (res.data[0].id).toString())
-                dispatch(
-                    {
-                        type: 'LOGIN_SUCCESS',
-                        payload: res.data.id
-                    }
-                )
+                .then((responseAsync) => {
+                    dispatch(
+                        {
+                            type: 'LOGIN_SUCCESS',
+                            payload: res.data[0].id
+                        }
+                    )
+                })
+                .catch((errorAsync) => {
+                    dispatch(
+                        {
+                            type: 'LOGIN_FAILED',
+                            payload: 'Error Async'
+                        }
+                    )
+                })
             }else{
                 dispatch(
                     {

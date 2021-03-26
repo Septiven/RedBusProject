@@ -2,33 +2,13 @@
   "users": [
     {
       "email": "Lukas@gmail.com",
-      "password": "123123#",
+      "password": "*12345",
       "id": 1
     },
     {
       "email": "septiven@gmail.com",
-      "password": "123456*",
+      "password": "123@456",
       "id": 2
-    },
-    {
-      "email": "septi@yahoo.com",
-      "password": "654321*",
-      "id": 3
-    },
-    {
-      "email": "Lukas123@gmail.com",
-      "password": "1231****",
-      "id": 4
-    },
-    {
-      "email": "lukasssss@yahoo.com",
-      "password": "1234567*",
-      "id": 5
-    },
-    {
-      "email": "steven@yahoo.com",
-      "password": "13425&",
-      "id": 6
     }
   ],
   "shuttles": [
@@ -36,8 +16,8 @@
       "id": 1,
       "type": "Bus",
       "name": "Pahala Kencana",
-      "from": "Bandung 11:00",
-      "to": "Surabaya  23:45",
+      "from": "Bandung",
+      "to": "Surabaya",
       "class": "Executive",
       "price": 275000,
       "seat": [
@@ -89,8 +69,8 @@
       "id": 2,
       "type": "Bus",
       "name": "Sugeng Rahayu",
-      "from": "Bandung 21:00",
-      "to": "Surabaya  11:00",
+      "from": "Bandung",
+      "to": "Surabaya",
       "class": "Executive",
       "price": 225000,
       "seat": [
@@ -195,8 +175,8 @@
       "id": 4,
       "type": "Travel",
       "name": "Jackal Holiday",
-      "from": "Bandung 07:30",
-      "to": "Tangerang  11:30",
+      "from": "Bandung",
+      "to": "Tangerang",
       "class": "Executive",
       "price": 125000,
       "seat": [
@@ -224,8 +204,8 @@
       "id": 5,
       "type": "Travel",
       "name": "DayTrans",
-      "from": "Bandung 12:00",
-      "to": "Tangerang  17:00",
+      "from": "Bandung",
+      "to": "Tangerang",
       "class": "Executive",
       "price": 105000,
       "seat": [
@@ -275,6 +255,18 @@
       "id": 5,
       "facility": "Lugage Storage",
       "image": "https://www.flaticon.com/svg/vstatic/svg/4164/4164916.svg?token=exp=1616259493~hmac=835794a1b4400b6eed7a34b61ddc4a07"
+    }
+  ],"transactions": [
+    {
+      "status": "Paid",
+      "idUser": 1,
+      "name": "Pahala Kencana",
+      "class": "Executive",
+      "from": "Bandung",
+      "to": "Surabaya",
+      "departureDate": "26-03-2021",
+      "seat": ["1A", "3C", "5A"],
+      "totalPrice": 825000
     }
   ]
 }

@@ -32,7 +32,12 @@ const Register = ({navigation: {navigate}, onUserRegister, user}) => {
     }
 
     const onPasswordValidation = (input) => {
-        let symbol = /[!@#$%^&*]/
+        let symbol = /[!@$%^*]/
+        let notSymbol = /[#&]/
+
+        if(notSymbol.test(input)){
+            return setErrorInput('Symbol Yang Diperbolehkan : !@$%^*')
+        }
 
         if(input.length < 6){
             return setErrorInput('Password Minimal 6 Karakter')
@@ -102,7 +107,11 @@ const Register = ({navigation: {navigate}, onUserRegister, user}) => {
 
                     <Row style={{justifyContent: 'center', ...Spacing.prFive}}>
                         <Text style={{color: 'red', fontStyle: 'italic'}}>
-                            {errorInput}
+                            {errorInput?
+                                errorInput
+                            :
+                                null
+                            }
                             {
                                 user.error?
                                     user.error

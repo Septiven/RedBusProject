@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
- import React,{useEffect} from 'react';
+ import React,{useEffect,useState} from 'react';
 
 // Stack
 import RegisterRouter from './routes/RegisterRouter'
@@ -20,9 +20,12 @@ import {connect} from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {onSaveAsyncStroage} from './src/Redux/Actions/UserAction'
 
-
+// Splash Screen
+import Splash from './src/Screens/Splash'
  
 const App = ({user, onSaveAsyncStroage}) => {
+
+  const [isLogin, setIsLogin] = useState(false)
 
   useEffect(() => {
     getAsyncStorageData()
@@ -33,10 +36,17 @@ const App = ({user, onSaveAsyncStroage}) => {
     .then((result) => {
       onSaveAsyncStroage(result)
       console.log(result)
+      setIsLogin(true)
     })
     .catch((err) => {
       console.log(err)
     })
+  }
+
+  if(isLogin === false){
+    return(
+      <Splash />
+    )
   }
 
   return(
